@@ -6,8 +6,8 @@ class RumahSakit extends Equatable {
   final String alamat;
   final String deskripsi;
   final String imageUrl;
-  final String location;
-  final int telpon;
+  final Location location;
+  final String telpon;
 
   const RumahSakit({
     required this.id,
@@ -35,5 +35,28 @@ class RumahSakit extends Equatable {
   @override
   String toString() {
     return 'RumahSakit(id: $id, nama: $nama, alamat: $alamat, deskripsi: $deskripsi, imageUrl: $imageUrl, location: $location, telpon: $telpon)';
+  }
+}
+
+class Location extends Equatable {
+  final double longitude;
+  final double latitude;
+
+  const Location({
+    required this.longitude,
+    required this.latitude,
+  });
+
+  @override
+  List<Object> get props {
+    return [
+      longitude,
+      latitude,
+    ];
+  }
+
+  @override
+  String toString() {
+    return 'Location(longitude: $longitude, latitude: $latitude)';
   }
 }
