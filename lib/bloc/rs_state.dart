@@ -20,3 +20,5 @@ class RsLoadingSuccses extends RsState {
 }
 
 class RsLoadingError extends RsState {}
+
+class RsLoadingEmptyState extends RsState {}

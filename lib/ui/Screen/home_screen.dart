@@ -105,6 +105,8 @@ class _HomeBodyState extends State<HomeBody> {
                           return WidgetState.loading(context);
                         } else if (state is RsLoadingError) {
                           return WidgetState.erroLoading(context);
+                        } else if (state is RsLoadingEmptyState) {
+                          return WidgetState.emptyState(context);
                         } else if (state is RsLoadingSuccses) {
                           return GridView.builder(
                             gridDelegate:
@@ -171,9 +173,9 @@ class _HomeBodyState extends State<HomeBody> {
                                                   MaterialPageRoute(
                                                     builder: (context) {
                                                       return GoogleMapScreen(
-                                                          ids:
-                                                              state.rumahSakits[
-                                                                  index]);
+                                                        ids: state
+                                                            .rumahSakits[index],
+                                                      );
                                                     },
                                                   ),
                                                 );

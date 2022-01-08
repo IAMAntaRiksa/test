@@ -15,4 +15,11 @@ class WidgetState {
       ],
     );
   }
+
+  static Widget emptyState(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: const [Text('Tidak Ad Data')],
+    );
+  }
 }
