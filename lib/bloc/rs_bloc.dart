@@ -16,6 +16,7 @@ class RsBloc extends Bloc<RsEvent, RsState> {
     on<SearchEvent>(onSearchRS);
   }
 
+  /// fetch data
   FutureOr<void> onFetcRS(FetchRs event, Emitter<RsState> emit) {
     emit(RsLoading());
     try {
@@ -28,23 +29,28 @@ class RsBloc extends Bloc<RsEvent, RsState> {
     }
   }
 
+  /// login telpon
   FutureOr<void> onCallnumm(CallNumEvent event, Emitter<RsState> emit) async {
     if (await canLaunch(event.number)) {
       await launch(event.number);
     }
   }
 
+  /// logic search Rs
   FutureOr<void> onSearchRS(SearchEvent event, Emitter<RsState> emit) async {
+    emit(RsLoading());
     try {
       List<RumahSakit> rsList = mockRs.rumahSakits;
 
-      bool check = rsList
-          .map((element) => element.nama.contains(event.searchRs))
-          .contains(true);
-      if (check) {
-        print('ada data');
+      List<RumahSakit> searchListRS = rsList.where((element) {
+        return element.nama
+            .toLowerCase()
+            .contains(event.searchRs.toLowerCase());
+      }).toList();
+      if (searchListRS.isNotEmpty) {
+        emit(RsLoadingSuccses(rumahSakits: searchListRS));
       } else {
-        print('tidak ad data');
+        emit(RsLoadingEmptyState());
       }
     } catch (e) {
       emit(RsLoadingError());
